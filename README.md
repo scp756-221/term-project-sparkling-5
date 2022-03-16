@@ -23,3 +23,71 @@ The resulting output should include tables User and Music.
 4. Performance test: Run your application with various loads and measure/observe its behaviour.
 5. Exploring how the system handles failures and approaches to remediate the error
 
+## Commands for Reference
+
+### To Start 
+
+Clone the repo and copy your own `cluster/tpl-vars.txt` to the corresponding location. 
+
+### Instantiate the templates
+
+~~~
+make -f k8s-tpl.mak templates
+~~~
+
+### Start the tools container
+
+~~~
+tools/shell.sh
+~~~
+
+### Start the EKS cluster
+
+~~~
+make -f eks.mak start
+~~~
+
+### Provision the cluster 
+Create a namespace c756ns and set it as the default:
+
+~~~
+kubectl create ns c756ns
+kubectl config set-context --current --namespace=c756ns
+~~~
+
+Deploy the services:
+
+~~~
+make -f k8s.mak provision
+~~~
+
+### Create load using gatling
+
+~~~
+tools/gatling USERS SIM_NAME
+~~~
+
+For example, simulate 2 users to query music microservice
+
+~~~
+tools/gatling 2 ReadMusicSim
+~~~
+
+### Grafana Url
+
+~~~
+make -f k8s.mak grafana-url
+~~~
+
+### Prometheus Url
+
+~~~
+make -f k8s.mak grafana-url
+~~~
+
+
+### Kiali Url
+
+~~~
+make -f k8s.mak kiali-url
+~~~
