@@ -64,13 +64,13 @@ make -f k8s.mak provision
 ### Create load using gatling
 
 ~~~
-tools/gatling USERS SIM_NAME
+tools/gatling.sh USERS SIM_NAME
 ~~~
 
 For example, simulate 2 users to query music microservice
 
 ~~~
-tools/gatling 2 ReadMusicSim
+tools/gatling.sh 2 ReadMusicSim
 ~~~
 
 ### Grafana Url
