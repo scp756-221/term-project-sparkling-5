@@ -27,7 +27,7 @@ The resulting output should include tables User and Music.
 
 ### To Start 
 
-Clone the repo and copy your own `cluster/tpl-vars.txt` to the corresponding location. 
+Clone the repo and copy your own `cluster/tpl-vars.txt` and `cluster/ghcr.io-token.txt` to the corresponding location. 
 
 ### Instantiate the templates
 
