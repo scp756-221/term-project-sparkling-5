@@ -75,7 +75,7 @@ class Music():
         """
         r = requests.put(
             self._url + 'write_orig_artist/' + m_id,
-            json={'orig_artist': orig_artist},
+            json={'OrigArtist': orig_artist},
             headers={'Authorization': self._auth}
         )
         return r.status_code
@@ -141,7 +141,7 @@ class Music():
         if r.status_code != 200:
             return r.status_code, None
         item = r.json()
-        return r.status_code, item['orig_artist']
+        return r.status_code, item['OrigArtist']
 
     def delete(self, m_id):
         """Delete an artist, song pair.

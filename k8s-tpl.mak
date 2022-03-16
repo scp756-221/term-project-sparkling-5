@@ -62,9 +62,9 @@ templates:
 # 1. Templates have been instantiated (make -f k8s-tpl.mak templates)
 # 2. Current context is a running Kubernetes cluster (make -f {az,eks,gcp,mk}.mak start)
 #
-#  Nov 2021: Kiali is causing problems so do not deploy
-#provision: istio prom kiali deploy
-provision: istio prom deploy
+#  Feb 2022: Kiali 1.45.0 works. (Refer to obs.mak's KIALI_VER)
+provision: istio prom kiali deploy
+
 
 # --- deploy: Deploy and monitor the three microservices
 # Use `provision` to deploy the entire stack (including Istio, Prometheus, ...).
