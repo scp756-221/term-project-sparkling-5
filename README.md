@@ -82,7 +82,7 @@ make -f k8s.mak grafana-url
 ### Prometheus Url
 
 ~~~
-make -f k8s.mak grafana-url
+make -f k8s.mak prometheus-url
 ~~~
 
 
