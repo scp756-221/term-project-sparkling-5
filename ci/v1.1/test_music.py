@@ -64,7 +64,6 @@ def test_orig_artist_oa(mserv, m_id_oa):
 
 def test_full_cycle(mserv):
     # `mserv` is an instance of the `Music` class
-    # test_full_cycle
 
     # Performance at 2010 Vancouver Winter Olympics
     song = ('k. d. lang', 'Hallelujah')
@@ -74,21 +73,19 @@ def test_full_cycle(mserv):
     orig_orig_artist = 'Leonard Cohen'
 
     # Create a music record and save its id in the variable `m_id`
+    # ... Fill in the test ...
     trc, m_id = mserv.create(song[0], song[1], orig_artist)
     assert trc == 200
-
-    # Verify the created music record
-    trc, oa = mserv.read_orig_artist(m_id)
-    assert trc == 200 and oa == orig_artist
-
-    # Update the music record
-    trc = mserv.write_orig_artist(m_id, orig_orig_artist)
-    assert trc == 200
-
-    # Verify the updated music record
     trc, artist, title, oa = mserv.read(m_id)
     assert (trc == 200 and artist == song[0] and title == song[1]
-            and oa == orig_orig_artist)
-
+            and oa == orig_artist)
+    # Verify my changes and Other Dev’s work together
+    trc, oa = mserv.read_orig_artist(m_id)
+    assert trc == 200 and oa == orig_artist
+    # Check overwritten
+    trc = mserv.write_orig_artist(m_id, orig_orig_artist)
+    assert trc == 200
+    trc, oa = mserv.read_orig_artist(m_id)
+    assert trc == 200 and oa == orig_orig_artist
     # The last statement of the test
     mserv.delete(m_id)
