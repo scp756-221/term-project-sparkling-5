@@ -85,7 +85,7 @@ rollout-s2: $(LOG_DIR)/s2-$(S2_VER).repo.log  cluster/s2-dpl-$(S2_VER).yaml
 	$(KC) rollout -n $(APP_NS) restart deployment/cmpt756s2-$(S2_VER) | tee -a $(LOG_DIR)/rollout-s2.log
 
 # --- rollout-s3: Rollout a new deployment of S3
-rollout-s1: s3
+rollout-s3: s3
 	$(KC) rollout -n $(APP_NS) restart deployment/cmpt756s3
 
 # --- rollout-db: Rollout a new deployment of DB
