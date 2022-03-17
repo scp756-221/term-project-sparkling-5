@@ -91,3 +91,9 @@ make -f k8s.mak grafana-url
 ~~~
 make -f k8s.mak kiali-url
 ~~~
+
+### External IP address
+
+~~~
+kubectl -n istio-system get service istio-ingressgateway | cut -c -140
+~~~
