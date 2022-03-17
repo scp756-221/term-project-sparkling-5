@@ -9,3 +9,7 @@ api.mak
 __pycache__
 cluster/tpl-vars.txt
 cluster/ghcr.io-token.txt
+cluster/s3.yaml
+s2/standalone/README.md
+s2/standalone/unique_code.py
+s2/v1/unique_code.py
