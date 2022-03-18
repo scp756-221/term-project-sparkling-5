@@ -42,7 +42,7 @@ db = {
 @bp.route('/', methods=['GET'])
 @metrics.do_not_track()
 def hello_world():
-    return ("success")
+    return ("s3 is deployed successfully!")
 
 
 @bp.route('/health')
