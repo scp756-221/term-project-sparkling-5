@@ -55,7 +55,7 @@ kubectl create ns c756ns
 kubectl config set-context --current --namespace=c756ns
 ~~~
 
-Deploy the services:
+Deploy the services (ensure to make all the packages public on the Github):
 
 ~~~
 make -f k8s.mak provision
@@ -82,7 +82,7 @@ make -f k8s.mak grafana-url
 ### Prometheus Url
 
 ~~~
-make -f k8s.mak grafana-url
+make -f k8s.mak prometheus-url
 ~~~
 
 
