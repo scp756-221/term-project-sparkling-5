@@ -81,7 +81,9 @@ def create_playlist():
 
 @bp.route('/<playlist_id>', methods=['GET'])
 def get_playlist(playlist_id):
-    
+    """
+    Get a playlist specified by playlist_id.
+    """ 
     payload = {"objtype": "playlist", "objkey": playlist_id}
     url = db['name'] + '/' + db['endpoint'][0]
     response = requests.get(
@@ -90,6 +92,16 @@ def get_playlist(playlist_id):
     
     return (response.json())
 
+@bp.route('/<playlist_id>', methods=['DELETE'])
+def delete_playlist(playlist_id):
+    """
+    Delete a playlist specified by playlist_id.
+    """    
+    url = db['name'] + '/' + db['endpoint'][2]
+
+    response = requests.delete(url,
+                               params={"objtype": "playlist", "objkey": playlist_id})
+    return (response.json())
 
 # All database calls will have this prefix.  Prometheus metric
 # calls will not---they will have route '/metrics'.  This is
