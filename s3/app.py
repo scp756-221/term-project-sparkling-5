@@ -34,7 +34,8 @@ db = {
     "endpoint": [
         "read",
         "write",
-        "delete"
+        "delete",
+        "update"
     ]
 }
 
@@ -42,7 +43,7 @@ db = {
 @bp.route('/', methods=['GET'])
 @metrics.do_not_track()
 def hello_world():
-    return ("s3 is deployed successfully!")
+    return ("test: s3 is deployed successfully!")
 
 
 @bp.route('/health')
@@ -50,11 +51,44 @@ def hello_world():
 def health():
     return Response("", status=200, mimetype="application/json")
 
+@bp.route('/hello', methods=['GET'])
+@metrics.do_not_track()
+def hello():
+    return ("hello")
 
 @bp.route('/readiness')
 @metrics.do_not_track()
 def readiness():
     return Response("", status=200, mimetype="application/json")
+
+@bp.route('/', methods=['POST'])
+def create_playlist():
+    """
+    Create a playlist.
+    """
+    try:
+        content = request.get_json()
+        music_str = content['music_list']
+        music_list = music_str.strip().split(",")
+    except Exception:
+        return json.dumps({"message": "error reading arguments"})
+    url = db['name'] + '/' + db['endpoint'][1]
+    response = requests.post(
+        url,
+        json={"objtype": "playlist",
+              "music_list": music_list})
+    return (response.json())
+
+@bp.route('/<playlist_id>', methods=['GET'])
+def get_playlist(playlist_id):
+    
+    payload = {"objtype": "playlist", "objkey": playlist_id}
+    url = db['name'] + '/' + db['endpoint'][0]
+    response = requests.get(
+        url,
+        params=payload)
+    
+    return (response.json())
 
 
 # All database calls will have this prefix.  Prometheus metric
