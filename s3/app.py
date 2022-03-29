@@ -103,6 +103,108 @@ def delete_playlist(playlist_id):
                                params={"objtype": "playlist", "objkey": playlist_id})
     return (response.json())
 
+@bp.route('/<playlist_id>/add/<new_music>', methods=['PUT'])
+def add_music(playlist_id, new_music):
+    """
+    Add music to an existing playlist.
+    """ 
+    payload = {"objtype": "playlist", "objkey": playlist_id}
+    url = db['name'] + '/' + db['endpoint'][0]
+    playlist_response = requests.get(
+        url,
+        params=payload)
+
+    playlist_json = playlist_response.json()
+
+    if (playlist_json['Count'] == 0):
+        return Response(json.dumps({"error": f"playlist {playlist_id} not found"}),
+                status=401,
+                mimetype='application/json')
+    
+    music_list = playlist_json["Items"][0]["music_list"]
+
+    if new_music in music_list:
+        return Response(json.dumps({"error": f"{new_music} already exist in the playlist"}),
+                        status=401,
+                        mimetype='application/json')
+
+    music_list.append(new_music)
+    url = db['name'] + '/' + db['endpoint'][3]
+    response = requests.put(
+        url,
+        params={"objtype": "playlist", "objkey": playlist_id},
+        json={"music_list": music_list})
+
+    return (response.json())
+
+@bp.route('/<playlist_id>/delete/<music>', methods=['PUT'])
+def delete_music(playlist_id, music):
+    """
+    Delete music in an playlist.
+    """ 
+    payload = {"objtype": "playlist", "objkey": playlist_id}
+    url = db['name'] + '/' + db['endpoint'][0]
+    playlist_response = requests.get(
+        url,
+        params=payload)
+
+    playlist_json = playlist_response.json()
+
+    if (playlist_json['Count'] == 0):
+        return Response(json.dumps({"error": f"playlist {playlist_id} not found"}),
+                status=401,
+                mimetype='application/json')
+    
+    music_list = playlist_json["Items"][0]["music_list"]
+
+    if music not in music_list:
+        return Response(json.dumps({"error": f"{music} is not in the playlist"}),
+                        status=401,
+                        mimetype='application/json')
+
+    music_list.remove(music)
+    url = db['name'] + '/' + db['endpoint'][3]
+    response = requests.put(
+        url,
+        params={"objtype": "playlist", "objkey": playlist_id},
+        json={"music_list": music_list})
+
+    return (response.json())
+
+@bp.route('/<playlist_id>/top/<music>', methods=['PUT'])
+def top_music(playlist_id, music):
+    """
+    Set specific music to top of a playlist.
+    """ 
+    payload = {"objtype": "playlist", "objkey": playlist_id}
+    url = db['name'] + '/' + db['endpoint'][0]
+    playlist_response = requests.get(
+        url,
+        params=payload)
+
+    playlist_json = playlist_response.json()
+
+    if (playlist_json['Count'] == 0):
+        return Response(json.dumps({"error": f"playlist {playlist_id} not found"}),
+                status=401,
+                mimetype='application/json')
+    
+    music_list = playlist_json["Items"][0]["music_list"]
+
+    if music not in music_list:
+        return Response(json.dumps({"error": f"{music} is not in the playlist"}),
+                        status=401,
+                        mimetype='application/json')
+
+    music_list.insert(0, music_list.pop(music_list.index(music)))
+    url = db['name'] + '/' + db['endpoint'][3]
+    response = requests.put(
+        url,
+        params={"objtype": "playlist", "objkey": playlist_id},
+        json={"music_list": music_list})
+
+    return (response.json())
+
 # All database calls will have this prefix.  Prometheus metric
 # calls will not---they will have route '/metrics'.  This is
 # the conventional organization.
