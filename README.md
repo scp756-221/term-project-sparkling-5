@@ -29,16 +29,16 @@ The resulting output should include tables User and Music.
 
 Clone the repo and copy your own `cluster/tpl-vars.txt` and `cluster/ghcr.io-token.txt` to the corresponding location. 
 
-### Instantiate the templates
-
-~~~
-make -f k8s-tpl.mak templates
-~~~
-
 ### Start the tools container
 
 ~~~
 tools/shell.sh
+~~~
+
+### Instantiate the templates
+
+~~~
+make -f k8s-tpl.mak templates
 ~~~
 
 ### Start the EKS cluster
@@ -55,7 +55,7 @@ kubectl create ns c756ns
 kubectl config set-context --current --namespace=c756ns
 ~~~
 
-Deploy the services:
+Deploy the services (ensure to make all the packages public on the Github):
 
 ~~~
 make -f k8s.mak provision
@@ -90,4 +90,16 @@ make -f k8s.mak prometheus-url
 
 ~~~
 make -f k8s.mak kiali-url
+~~~
+
+### External IP address
+
+~~~
+kubectl -n istio-system get service istio-ingressgateway | cut -c -140
+~~~
+
+### Check state of services
+
+~~~
+kubectl -n c756ns get gw,vs,deploy,svc,pods
 ~~~
