@@ -22,8 +22,8 @@ LOG_DIR=logs
 
 # these might need to change
 NS=c756ns
-CLUSTER_NAME=aws756
-EKS_CTX=aws756
+CLUSTER_NAME=aws757
+EKS_CTX=aws757
 
 
 NGROUP=worker-nodes

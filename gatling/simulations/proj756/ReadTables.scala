@@ -54,6 +54,17 @@ object RUser {
 
 }
 
+object RPlaylist {
+  val feeder = csv("playlist.csv").eager.circular
+
+  val rplaylist = forever("i") {
+    feed(feeder)
+    .exec(http("RPlaylist ${i}")
+      .get("/api/v1/playlist/${UUID}"))
+      .pause(1)
+  }
+}
+
 /*
   After one S1 read, pause a random time between 1 and 60 s
 */
@@ -80,6 +91,17 @@ object RMusicVarying {
     .exec(http("RMusicVarying ${i}")
       .get("/api/v1/music/${UUID}"))
     .pause(1, 60)
+  }
+}
+
+object RPlaylistVarying {
+  val feeder = csv("playlist.csv").eager.circular
+
+  val rplaylist = forever("i") {
+    feed(feeder)
+    .exec(http("RPlaylistVarying ${i}")
+      .get("/api/v1/playlist/${UUID}"))
+    .pause(1,60)
   }
 }
 
@@ -131,6 +153,15 @@ class ReadMusicSim extends ReadTablesSim {
 
   setUp(
     scnReadMusic.inject(atOnceUsers(Utility.envVarToInt("USERS", 1)))
+  ).protocols(httpProtocol)
+}
+
+class ReadPlaylistSim extends ReadTablesSim {
+  val scnReadPlaylist = scenario("ReadPlaylist")
+    .exec(RPlaylist.rplaylist)
+
+  setUp(
+    scnReadPlaylist.inject(atOnceUsers(Utility.envVarToInt("USERS", 1)))
   ).protocols(httpProtocol)
 }
 
