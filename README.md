@@ -27,7 +27,29 @@ The resulting output should include tables User and Music.
 
 ### To Start 
 
-Clone the repo and copy your own `cluster/tpl-vars.txt` and `cluster/ghcr.io-token.txt` to the corresponding location. 
+Clone the repo and copy your own `cluster/tpl-vars.txt` to the corresponding location. 
+
+### Install required packages
+
+~~~
+Install Kubernetes Ctl
+sh install_dependencies.sh k8s
+~~~
+
+~~~
+Install eks Ctl
+sh install_dependencies.sh eks
+~~~
+
+~~~
+Install Istio
+sh install_dependencies.sh istio
+~~~
+
+~~~
+Install helm
+sh install_dependencies.sh helm
+~~~
 
 ### Start the tools container
 
@@ -39,6 +61,14 @@ tools/shell.sh
 
 ~~~
 make -f k8s-tpl.mak templates
+~~~
+
+### To load the new playlist table
+
+~~~
+make -f k8s.mak dynamodb-clean
+make -f k8s.mak dynamodb-init
+make -f k8s.mak ls-tables
 ~~~
 
 ### Start the EKS cluster
