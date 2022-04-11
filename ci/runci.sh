@@ -53,12 +53,23 @@ fi
 set -o errexit
 
 set -o xtrace
-echo "${ver}"
 # Turn off errexit so we continue even if CI test returns failure
 set +o errexit
-${COMP} -f ${ver}/compose.yaml up --build --abort-on-container-exit --exit-code-from test
-# Return code from 'up' is the test result
-trc=$?
-# Shutdown and delete all the containers before returning
-${COMP} -f ${ver}/compose.yaml down
+
+if [ "$ver" = "v3" ]; then
+  echo "version: v3"
+  ${COMP} -f ${ver}/compose.yaml up --build --abort-on-container-exit --exit-code-from test
+  # Return code from 'up' is the test result
+  trc=$?
+  # Shutdown and delete all the containers before returning
+  ${COMP} -f ${ver}/compose.yaml down
+else
+  echo "OTHER version: ${ver}"
+  ${COMP} -f ${ver}/compose_old.yaml up --build --abort-on-container-exit --exit-code-from test
+  # Return code from 'up' is the test result
+  trc=$?
+  # Shutdown and delete all the containers before returning
+  ${COMP} -f ${ver}/compose_old.yaml down
+fi
+
 exit ${trc}
