@@ -25,24 +25,24 @@ services:
       AWS_SECRET_ACCESS_KEY: 'DUMMY_ACCESS_ KEY'
       SVC_LOADER_TOKEN: 'DUMMY_LOADER_TOKEN'
       DYNAMODB_URL: 'http://dynamodb-local:8000'
-  # cmpt756s1:
-  #   depends_on:
-  #     - dynamodb-local
-  #     - cmpt756db
-  #   build: ../s1
-  #   image: ci_s1
-  #   container_name: cmpt756s1
-  #   ports:
-  #    - "30000:30000"
-  # cmpt756s2:
-  #   depends_on:
-  #     - dynamodb-local
-  #     - cmpt756db
-  #   build: ../s2/v1.1
-  #   image: ci_s2
-  #   container_name: cmpt756s2
-  #   ports:
-  #    - "30001:30001"
+  cmpt756s1:
+    depends_on:
+      - dynamodb-local
+      - cmpt756db
+    build: ../s1
+    image: ci_s1
+    container_name: cmpt756s1
+    ports:
+     - "30000:30000"
+  cmpt756s2:
+    depends_on:
+      - dynamodb-local
+      - cmpt756db
+    build: ../s2/v1.1
+    image: ci_s2
+    container_name: cmpt756s2
+    ports:
+     - "30001:30001"
   cmpt756s3:
     depends_on:
       - dynamodb-local
