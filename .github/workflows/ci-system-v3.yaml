@@ -5,6 +5,7 @@ on:
     paths:
       - db/*
       - s3/*
+      - ci/*
       - ci/v3/*
       - .github/workflows/ci-system-v3.yaml
 
