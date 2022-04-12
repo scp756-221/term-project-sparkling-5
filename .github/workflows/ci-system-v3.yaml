@@ -1,4 +1,4 @@
-name: CI test of v1.1 music 
+name: CI test of v3 playlist
 
 on:
   push:
