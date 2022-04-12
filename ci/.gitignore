@@ -1,5 +1,5 @@
 docker
 buildall.sh
-# compose.yaml
+compose.yaml
 create-local-tables.sh
 
