@@ -29,9 +29,9 @@ def get_playlist(playlist):
     return playlist['Items'][0]['music_list']
 
 def test_simple_run(mserv, playlist_raw):
-    print("Nothing done here")
-    # m_id = mserv.create_playlist(playlist_raw)
-    # m_playlist_id = m_id["playlist_id"]
+    # print("Nothing done here")
+    m_id = mserv.create_playlist(playlist_raw)
+    m_playlist_id = m_id["playlist_id"]
 
     # playlist_read = mserv.get_playlist(m_playlist_id)
     # cur_playlist = get_playlist(playlist_read)
