@@ -54,7 +54,7 @@ services:
      - "30003:30003"
   test:
     # command: "pytest --user_address cmpt756s1 --user_port 30000 --music_address cmpt756s2 --music_port 30001 --table_suffix kridergod"
-    command: "pytest --playlist_address cmpt756s3 --playlist_port 30003 --table_suffix kridergod"
+    command: "pytest --playlist_address cmpt756s3 --playlist_port 30003 --table_suffix ZZ-REG-ID"
     # command: "pytest --user_address cmpt756s1 --user_port 30000 --music_address cmpt756s2 --music_port 30001 --playlist_address cmpt756s3 --playlist_port 30003 --table_suffix kridergod"
     depends_on:
       - dynamodb-local
