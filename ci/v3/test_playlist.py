@@ -22,7 +22,7 @@ def mserv(request, playlist_url, auth):
 
 @pytest.fixture
 def playlist_raw(request):
-    content = None
+    content = 'A,B'
     return content
 
 def get_playlist(playlist):
