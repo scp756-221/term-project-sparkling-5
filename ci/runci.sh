@@ -72,7 +72,10 @@ set +o errexit
 #   ${COMP} -f ${ver}/compose_old.yaml down
 # fi
 
-echo "version: v3"
+if [ "$ver" = "v3" ]; then
+  echo "version: v3"
+fi
+
 ${COMP} -f ${ver}/compose.yaml up --build --abort-on-container-exit --exit-code-from test
 # Return code from 'up' is the test result
 trc=$?
