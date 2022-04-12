@@ -31,32 +31,32 @@ def get_playlist(playlist):
 def test_simple_run(mserv, playlist_raw):
     # print("Nothing done here")
     m_id = mserv.create_playlist(playlist_raw)
-    # m_playlist_id = m_id["playlist_id"]
+    m_playlist_id = m_id["playlist_id"]
 
-    # playlist_read = mserv.get_playlist(m_playlist_id)
-    # cur_playlist = get_playlist(playlist_read)
-    # print(cur_playlist)
-    # assert 'A' in cur_playlist
+    playlist_read = mserv.get_playlist(m_playlist_id)
+    cur_playlist = get_playlist(playlist_read)
+    print(cur_playlist)
+    assert 'A' in cur_playlist
 
-    # mserv.add_music(m_playlist_id, 'C')
-    # playlist_read = mserv.get_playlist(m_playlist_id)
-    # cur_playlist = get_playlist(playlist_read)
-    # print(cur_playlist)
-    # assert 'C' in cur_playlist
+    mserv.add_music(m_playlist_id, 'C')
+    playlist_read = mserv.get_playlist(m_playlist_id)
+    cur_playlist = get_playlist(playlist_read)
+    print(cur_playlist)
+    assert 'C' in cur_playlist
 
-    # mserv.delete_music(m_playlist_id, 'B')
-    # playlist_read = mserv.get_playlist(m_playlist_id)
-    # cur_playlist = get_playlist(playlist_read)
-    # print(cur_playlist)
-    # assert 'B' not in cur_playlist
+    mserv.delete_music(m_playlist_id, 'B')
+    playlist_read = mserv.get_playlist(m_playlist_id)
+    cur_playlist = get_playlist(playlist_read)
+    print(cur_playlist)
+    assert 'B' not in cur_playlist
 
-    # mserv.top_music(m_playlist_id, 'C')
-    # playlist_read = mserv.get_playlist(m_playlist_id)
-    # cur_playlist = get_playlist(playlist_read)
-    # print(cur_playlist)
-    # assert 'C' == cur_playlist[0]
+    mserv.top_music(m_playlist_id, 'C')
+    playlist_read = mserv.get_playlist(m_playlist_id)
+    cur_playlist = get_playlist(playlist_read)
+    print(cur_playlist)
+    assert 'C' == cur_playlist[0]
 
-    # mserv.delete_playlist(m_playlist_id)
+    mserv.delete_playlist(m_playlist_id)
 
 
 # @pytest.fixture

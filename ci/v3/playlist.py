@@ -47,8 +47,8 @@ class Playlist():
             self._url,
             json=payload
         )
-        print(self._url)
-        print(response)
+        # print(self._url)
+        # print(response)
 
         return (response.json())
         # return response.json()["playlist_id"]
