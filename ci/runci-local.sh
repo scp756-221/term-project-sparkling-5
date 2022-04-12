@@ -19,6 +19,7 @@ if [[ $# -gt 1 ]]; then
   echo "  default: v1"
   exit 1
 elif [[ $# -eq 1 ]]; then
+  echo "Version: ${1}"
   ver="${1}"
 else
   ver=v1
@@ -26,4 +27,3 @@ fi
 
 ./clear-ci-images.sh
 ./runci.sh ${ver}
-
