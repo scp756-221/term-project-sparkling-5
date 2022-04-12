@@ -29,25 +29,25 @@ def pytest_addoption(parser):
     Although these "options" are prefixed by '--', they
     are all required for the test suite to run.
     """
-    # parser.addoption(
-    #     '--user_address',
-    #     dest='user_address',
-    #     help="DNS name or IP address of user service."
-    #     )
-    # parser.addoption(
-    #     '--user_port',
-    #     type=int,
-    #     help="Port number of user service."
-    #    )
-    # parser.addoption(
-    #     '--music_address',
-    #     help="DNS name or IP address of music service."
-    #     )
-    # parser.addoption(
-    #     '--music_port',
-    #     type=int,
-    #     help="Port number of music service."
-    #     )
+    parser.addoption(
+        '--user_address',
+        dest='user_address',
+        help="DNS name or IP address of user service."
+        )
+    parser.addoption(
+        '--user_port',
+        type=int,
+        help="Port number of user service."
+       )
+    parser.addoption(
+        '--music_address',
+        help="DNS name or IP address of music service."
+        )
+    parser.addoption(
+        '--music_port',
+        type=int,
+        help="Port number of music service."
+        )
     parser.addoption(
         '--playlist_address',
         dest='playlist_address',
@@ -66,24 +66,24 @@ def pytest_addoption(parser):
         )
 
 
-# @pytest.fixture
-# def user_address(request):
-#     return request.config.getoption('--user_address')
+@pytest.fixture
+def user_address(request):
+    return request.config.getoption('--user_address')
 
 
-# @pytest.fixture
-# def user_port(request):
-#     return request.config.getoption('--user_port')
+@pytest.fixture
+def user_port(request):
+    return request.config.getoption('--user_port')
 
 
-# @pytest.fixture
-# def music_address(request):
-#     return request.config.getoption('--music_address')
+@pytest.fixture
+def music_address(request):
+    return request.config.getoption('--music_address')
 
 
-# @pytest.fixture
-# def music_port(request):
-#     return request.config.getoption('--music_port')
+@pytest.fixture
+def music_port(request):
+    return request.config.getoption('--music_port')
 
 @pytest.fixture
 def playlist_address(request):
@@ -100,16 +100,16 @@ def table_suffix(request):
     return request.config.getoption('--table_suffix')
 
 
-# @pytest.fixture
-# def user_url(request, user_address, user_port):
-#     return "http://{}:{}/api/v1/user/".format(
-#         user_address, user_port)
+@pytest.fixture
+def user_url(request, user_address, user_port):
+    return "http://{}:{}/api/v1/user/".format(
+        user_address, user_port)
 
 
-# @pytest.fixture
-# def music_url(request, music_address, music_port):
-#     return "http://{}:{}/api/v1/music/".format(
-#         music_address, music_port)
+@pytest.fixture
+def music_url(request, music_address, music_port):
+    return "http://{}:{}/api/v1/music/".format(
+        music_address, music_port)
 
 @pytest.fixture
 def playlist_url(request, playlist_address, playlist_port):
